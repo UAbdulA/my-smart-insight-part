@@ -27,7 +27,7 @@ from app.services.audit import log_status_change
 from app.services.analyzer import analyze_raw_text
 from app.services.responder import generate_smart_reply
 from models import AnalysisHistory, Base as LegacyBase, SessionLocal, Ticket, engine
-from services import generate_ai_reply, save_ai_reply_to_db
+#from services import generate_ai_reply, save_ai_reply_to_db
 from schemas import (
     AnalysisRequest,
     AnalysisResponse,
@@ -56,6 +56,8 @@ app = FastAPI(
 
 app.include_router(telegram_router)
 
+from app.api.v1 import status_and_analytics as status_router
+app.include_router(status_router.router, prefix="/api/v1")
 
 def _get_telegram_token() -> str | None:
     return (

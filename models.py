@@ -41,14 +41,6 @@ class AnalysisHistory(Base):
     )
 
 
-class Insight(Base):
-    __tablename__ = "insights"
-    __table_args__ = (
-        Index("ix_insights_source", "source"),
-        Index("ix_insights_status", "status"),
-        Index("ix_insights_created_at", "created_at"),
-    )
-
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     source: Mapped[InsightSource] = mapped_column(
         SAEnum(InsightSource, name="insight_source", native_enum=False),

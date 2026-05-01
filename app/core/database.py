@@ -30,3 +30,5 @@ AsyncSessionLocal = async_sessionmaker(
 async def get_async_session():
     async with AsyncSessionLocal() as session:
         yield session
+
+from app.models.feedback_models import AuditLog, Feedback
